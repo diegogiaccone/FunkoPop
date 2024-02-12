@@ -1,0 +1,315 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+body{
+    /* background-color: #110f0fea; */
+    background: repeat url("https://i.postimg.cc/Twd6qypm/pared.jpg");
+    background-size: 2000px 1400px;        
+}
+
+.card{
+    padding: 30px;
+    
+}
+
+#formulario{   
+    width: 30%;
+    background: #24303c;
+    padding: 50px;  
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;      
+    border-radius: 4px;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    color: white;
+    box-shadow: 7px 13px 37px #000;
+}
+
+
+header{
+    z-index: 100;
+}
+
+.title{
+    color: white;
+    text-align: center;
+
+}
+
+
+.hide, .remove{
+    display: none;
+}
+
+
+h3{
+    padding-right: 50px;
+
+}
+
+.chatBox{
+    background: rgba(0, 0, 0, .15);
+    padding: 0.25rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    height: 3rem;
+    box-sizing: border-box;
+    backdrop-filter: blur(10px);    
+}
+
+#lista{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#lista.li{
+    padding: 0.5rem 1rem;
+}
+
+#lista.li:nth-child(odd){
+    background: #dcf8c6;
+    text-align: right;
+    font-style: italic;
+    font-weight: 600;  
+}
+
+h1, h2, p{
+    color: white;
+}
+
+h4{
+    display: flex;
+    padding: 10px;
+    justify-content: end;
+}
+
+h1{
+    padding-right: 15px;  
+}
+
+.form-control{
+    margin: 10px;       
+}
+
+.form-signin{    
+    width: 25%;
+    margin: auto;
+    margin-top: 10%;    
+}
+
+
+.header2{
+    display: flex;
+    justify-content: space-between;     
+}
+
+
+.logout{       
+    padding-top: 5px; 
+    margin-left: 5px ; 
+}
+
+
+#btn{
+    display: flex;
+    justify-content: center;
+}
+
+.git{
+    margin-top: 15px;
+    width: 5,5rem;
+}
+
+.carrito{
+    min-height: 70vh;
+    max-width: 1000vh;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.table__productos{
+    display: flex; 
+}
+
+
+.table__precio{
+    padding-top: 45px;
+}
+
+.table__productos > img{
+    width: 7rem;
+    object-fit: contain;
+    border-radius: 6px;
+    margin-right: 20px;
+}
+
+.table__cantidad > input{
+    width: 40px;
+    border: none;
+    outline: 0;
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    margin-top: 45px;
+}
+
+.cart{
+    width: 50px;
+    padding: 5px;
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-bottom: 10px;   
+}
+
+.triangulo{
+    padding-top: 50px;
+}
+
+.delete{
+    width: 40px;
+    border: none;
+    outline: 0;
+    font-size: 16px;
+    font-weight: 700;   
+    margin-bottom: 20px;
+    margin-top: 40px;
+    margin-left: 10px;
+}
+
+.productall{
+    width: 200px;
+    margin-left: 10px;   
+}
+
+.product{
+    width: 100px;
+    margin-left: 20px;
+}
+
+.cart2{
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;   
+}
+
+.eliminar{
+    padding-top: 20px;
+}
+
+.divCard{
+    padding: 25px;   
+}
+
+.avatar{
+    padding: 0;
+    margin: auto;  
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+   }
+.navbartotal{
+    display: flex; 
+}
+
+.title{
+    display: flex;
+}
+
+.text{
+    text-align: justify
+}
+
+.footerstyle{
+    display: flex;
+    justify-content: space-between;
+}
+
+.divider {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.divider-left {
+    margin-left: 2rem;
+    margin-right: 1rem;
+    width: 100%;
+    border-bottom: 0.5px solid white;
+}
+
+.divider-center {
+    color: #fff;
+    font-size: 16px;
+}
+
+.divider-right {
+    margin-left: 1rem;
+    margin-right: 2rem;
+    width: 100%;
+    border-bottom: 0.5px solid white;
+}
+
+.strategy{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.pdf{
+    margin-left: 20px;
+}
+
+.container5 {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+  }
+
+  select:hover {
+    border-color: #999;
+  }
+
+  select:focus {
+    border-color: #555;
+    outline: none;
+  }
+
+  .btn-orange {
+    background-color: transparent;
+    border-color: #FF7300; /* Color del borde naranja */
+    color: #FF7300; /* Color de texto naranja */
+    border: 2px solid #FF7300; /* Borde naranja por defecto */
+    transition: border-color 0.3s; /* Transición suave para el cambio de color del borde */
+  }
+  
+  .btn-orange:hover {
+    background-color: #FF7300;    
+  }
+
+ 

@@ -1,0 +1,40 @@
+<main class="form-signin text-center shadow-lg p-3">
+  <form id="formLogin" action="login" method="post"> 
+ <div>
+<h1>LOGIN</h1>       
+ </div>   
+    <div class="form-floating">
+      <input type="email" class="form-control" id="user" name="user" placeholder="name@example.com">
+      <label for="user">Email</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
+      <label for="pass">Contraseña</label>
+    </div>
+    <button class="btn btn-success" type="submit">Ingresar</button>  
+    <a href="/registrar" type="button" class="btn btn-primary">Registrarse</a>
+    <div class="strategy">
+      <a href="/recovery" class="btn btn-danger git">Olvide mi Contraseña</a>      
+    </div> 
+    <div class="divider">
+      <div class="divider-left"></div>
+      <div class="divider-center">O</div>
+      <div class="divider-right"></div>
+    </div>
+
+    <div class="strategy">
+      <a href="/github" class="btn btn-warning git"><i class="fa-brands fa-github"></i> Github</a>
+      <a href="/google" class="btn btn-danger git"><i class="fab fa-google"></i> Google</a>
+      <a href="/facebook" class="btn btn-primary git"><i class="fab fa-facebook"></i> Facebook</a>
+    </div>      
+    {{#if sessionInfo.errorMessage }}
+      <div class="alert alert-danger mt-4" role="alert">{{sessionInfo.errorMessage}}</div>
+    {{/if}}
+  </form>
+</main> 
+
+
+
+     
+
+

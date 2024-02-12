@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 shadow-lg p-3 mb-5">
+            <div class="card border-primary">
+                <div class="card-header bg-danger text-white text-center">Error</div>
+                <div class="card-body text-primary">
+                    <form action="/" method="get">                    
+                      <div class="mb-3">
+                        <label for="user" class="form-label text-center">Las contraseñas ingresadas deben ser iguales vuelva hacia atras y verifique los datos ingresados</label>                        
+                    </div>                  
+                </div>
+                <div class="card-footer bg-transparent border-primary text-center">
+                    <a id="volverAtras" href="#" type="button" class="btn btn-danger">Volver</a>                    
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+  const botonVolverAtras = document.getElementById("volverAtras");
+  botonVolverAtras.addEventListener("click", () => {
+    window.history.back();
+  });
+</script>

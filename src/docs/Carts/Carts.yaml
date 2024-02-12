@@ -1,0 +1,223 @@
+# Bajo paths definimos las rutas
+paths:
+  /api/carts:
+    # En cada una agregamos los métodos habilitados según users.router.js
+    # Este es el método get que no recibe parámetros para retornar todos los usuarios
+    get:
+      summary: Retorna el carrito perteneciente al usuario de la session 
+      # Este título encabezará la lista
+      tags:
+        - Carts
+      # Es importante agregar esta sección de códigos de respuesta
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  # Esta línea hace referencia al esquema de User (tomado desde el modelo de Mongoose)
+                  # Se puede ver el esquema indicado más abajo, en components
+                  $ref: '#/components/schemas/carts'
+        "500":
+          description: 'ERROR'  
+ 
+  /api/carts/{id}:    
+    get:
+      summary: Devuelve el carrito que recibe por parametro y hace un populate de los productos 
+      tags:
+        - Products          
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/users'
+        "500":
+          description: 'ERROR'   
+    put:
+      summary: Actualiza los productos del carrito
+      tags:
+        - Carts
+      parameters:
+        - name: id
+          in: path
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              # Esta referencia permite indicar la lista de campos que se deberían
+              # enviar en el body al contactar a este endpoint (ver requestBodies más abajo)
+              $ref: '#/components/requestBodies/updateCart'
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/carts'
+        "500":
+          description: 'ERROR'
+    
+  /api/carts/{cid}/purchase:   
+    post:
+      summary: Finaliza la compra generando un ticket de compra se lo envia por mail juntamente con una factura eliminando los productos del carrito y descontandolos del stock
+      tags:
+        - Carts
+      parameters:
+        - cid: req.body.cid
+          tid: req.session.user.ticket[0]
+          in: path
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:              
+              $ref: '#/components/requestBodies/updateCarts'
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/carts'
+        "500":
+          description: 'ERROR'
+  /api/carts/{cid}/products/{pid}:    
+    post:
+      summary: Agrega un producto de la base de datos al carrito indicando por parametros el id del carrito y del producto
+      tags:
+        - Carts
+      parameters:
+        - cid: req.session.user.cart[0]                           
+          pid: req.body
+          in: path
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:              
+              $ref: '#/components/requestBodies/updateCarts'
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/carts'
+        "500":
+          description: 'ERROR'
+    delete:
+      summary: Borra un producto del carrito indicando por parametros el id del carrito y del producto
+      tags:
+        - Carts
+      parameters:
+        - cid: req.session.user.cart[0] 
+          pid: req.body
+          in: path
+          required: true
+          description: Mongoose ObjectID
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/carts'
+        "500":
+          description: 'ERROR'
+  /api/carts/{cid}:    
+    delete:
+      summary: Vacia el carrito completamente recibiendo porparametros el id del carrito
+      tags:
+        - Carts
+      parameters:
+        - cid: req.params.cid      
+          in: path
+          required: true
+          description: Mongoose ObjectID
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/carts'
+        "500":
+          description: 'ERROR'
+  /api/carts/{cid}/products/{pid}/{qty}:    
+   put:
+      summary: Actualiza la cantidad de un producto del carrito tomando como parametros el id del carrito el id del producto y la cantidad, si el producto existe el suma uno 
+      tags:
+        - Carts
+      parameters:
+        - cid: req.params.cid
+          pid: req.params.pid
+          in: path
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              # Esta referencia permite indicar la lista de campos que se deberían
+              # enviar en el body al contactar a este endpoint (ver requestBodies más abajo)
+              $ref: '#/components/requestBodies/updateCart'
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/carts'
+        "500":
+          description: 'ERROR'   
+  
+components:
+  schemas:
+    # Este esquema se coloca separado acá, para poder referenciarlo en distintos
+    # endpoints arriba
+    carts:
+      type: object
+      properties:
+        _id:
+          type: object
+          description: Mongoose ObjectID
+        prods:
+          type: array
+          description: Mongoose ObjectID
+        quantity:
+          type: number
+                   
+
+      # Siempre es útil un ejemplo, también pueden colocarse ejemplos específicos por endpoint arriba
+      example:       
+        _id: 6499f16bc42125bea8cc8fdc
+        products: array 
+
+
+  requestBodies:
+    updateCart:
+      type: object
+          
+       

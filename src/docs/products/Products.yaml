@@ -1,0 +1,346 @@
+# Bajo paths definimos las rutas
+paths:
+  /:
+    # En cada una agregamos los métodos habilitados según users.router.js
+    # Este es el método get que no recibe parámetros para retornar todos los usuarios
+    get:
+      summary: si no hay usuario logueado retorna el formulario de login para iniciar sesion, si existe un usuario logueado, Retorna la lista completa de productos con la logica de paginacion 
+      # Este título encabezará la lista
+      tags:
+        - Products
+      # Es importante agregar esta sección de códigos de respuesta
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  # Esta línea hace referencia al esquema de User (tomado desde el modelo de Mongoose)
+                  # Se puede ver el esquema indicado más abajo, en components
+                  $ref: '#/components/schemas/products'
+        "500":
+          description: 'ERROR'
+    post:
+      summary: por medio de la logica de paginacion este post va retornando cuatro productos por pagina por cada vez que se cambien a la siguiente o anterior
+      tags:
+        - Products      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              # Esta referencia permite indicar la lista de campos que se deberían
+              # enviar en el body al contactar a este endpoint (ver requestBodies más abajo)
+              $ref: '#/components/requestBodies/updateUser'
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        "500":
+          description: 'ERROR'
+ 
+  /logout:    
+    get:
+      summary: destruye los datos de la session y desloguea al usuario 
+      tags:
+        - Products          
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/users'
+        "500":
+          description: 'ERROR'   
+    
+  /login:   
+    post:
+      summary: Inicia una session ingresando los datos de un usuario existente por medio de un formulario recibiendo los datos por body
+      tags:
+        - Products
+      parameters:
+        - user: req.body.user
+          in: path
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:              
+              $ref: '#/components/requestBodies/updateProduct'
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        "500":
+          description: 'ERROR'
+  /api/update:    
+    get:
+      summary: Retorna un formulario para actualizar los datos de un producto en especifico (endpoint disponible para ADMIN o PREMIUM si el PREMIUM es owner del producto)
+      # Este título encabezará la lista
+      tags:
+        - Products
+      # Es importante agregar esta sección de códigos de respuesta
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  # Esta línea hace referencia al esquema de User (tomado desde el modelo de Mongoose)
+                  # Se puede ver el esquema indicado más abajo, en components
+                  $ref: '#/components/schemas/products'
+        "500":
+          description: 'ERROR'
+  /api/products_index:    
+    get:
+      summary: Retorna una lista de todos los productos en la base de datos y de un formulario para agregar un producto nuevo (este formulario solo esta disponible para usuarios ADMIN O PREMIUM)
+      # Este título encabezará la lista
+      tags:
+        - Products
+      # Es importante agregar esta sección de códigos de respuesta
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  # Esta línea hace referencia al esquema de User (tomado desde el modelo de Mongoose)
+                  # Se puede ver el esquema indicado más abajo, en components
+                  $ref: '#/components/schemas/products'
+        "500":
+          description: 'ERROR'
+    post:
+      summary: por medio de un formulario agrega un producto nuevo a la base de datos recibiendo los datos por body
+      tags:
+        - Products
+      parameters:
+        - title: req.body
+          description: req.body          
+          price: req.body          
+          thumbnail: req.body       
+          stock: req.body          
+          owner: req.session.user.user          
+          category: req.body            
+          in: path
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              # Esta referencia permite indicar la lista de campos que se deberían
+              # enviar en el body al contactar a este endpoint (ver requestBodies más abajo)
+              $ref: '#/components/requestBodies/updateProduct'
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/products'
+        "500":
+          description: 'ERROR'
+  /api/products:    
+    get:
+      summary: Retorna una lista de todos los productos en formato json (solo visible para ADMIN)
+      # Este título encabezará la lista
+      tags:
+        - Products
+      # Es importante agregar esta sección de códigos de respuesta
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  # Esta línea hace referencia al esquema de User (tomado desde el modelo de Mongoose)
+                  # Se puede ver el esquema indicado más abajo, en components
+                  $ref: '#/components/schemas/products'
+        "500":
+          description: 'ERROR'    
+  /api/products_index{id}:    
+    put:
+      summary: Recibe un body para modificar un el Producto
+      tags:
+        - Products
+      parameters:
+        - title: req.body
+          description: req.body          
+          price: req.body          
+          thumbnail: req.body       
+          stock: req.body          
+          owner: req.session.user.user          
+          category: req.body
+          in: path
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              # Esta referencia permite indicar la lista de campos que se deberían
+              # enviar en el body al contactar a este endpoint (ver requestBodies más abajo)
+              $ref: '#/components/requestBodies/updateProduct'
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        "500":
+          description: 'ERROR'
+    
+    delete:
+      summary: Borra el producto con el id indicado
+      tags:
+        - Products
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Mongoose ObjectID
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/product'
+        "500":
+          description: 'ERROR'
+
+    get:
+      summary: Retorna un formulario para la asignacion de roles a los diferentes usuarios, este endopoint solo esta disponible para los ADMIN
+      # Este título encabezará la lista
+      tags:
+        - Users
+      # Es importante agregar esta sección de códigos de respuesta
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  # Esta línea hace referencia al esquema de User (tomado desde el modelo de Mongoose)
+                  # Se puede ver el esquema indicado más abajo, en components
+                  $ref: '#/components/schemas/users'
+        "500":
+          description: 'ERROR'
+    post:
+      summary: Recibe por body el email del usuario y le asigna un rol al usuario indicado mediante un formulario select de roles, (solo habilitado para ADMIN)
+      tags:
+        - Users
+      parameters:
+        - user: req.body.user
+          in: path
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              # Esta referencia permite indicar la lista de campos que se deberían
+              # enviar en el body al contactar a este endpoint (ver requestBodies más abajo)
+              $ref: '#/components/requestBodies/updateUser'
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        "500":
+          description: 'ERROR'
+
+components:
+  schemas:
+    # Este esquema se coloca separado acá, para poder referenciarlo en distintos
+    # endpoints arriba
+    products:
+      type: object
+      properties:
+        _id:
+          type: object
+          description: Mongoose ObjectID
+        title:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        thumbnail:
+          type: string          
+        code: 
+          type: string
+        stock: 
+          type: number
+        owner:           
+            type: string
+        category:           
+            type: string                
+
+      # Siempre es útil un ejemplo, también pueden colocarse ejemplos específicos por endpoint arriba
+      example:       
+        _id: 6499f16bc42125bea8cc8fdc
+        title: "Iron Man"
+        description: "Él Genio, Millonario, Playboy Filantropo, en su increible MARK 42"
+        price: 4500
+        thumbnail: "https://i.postimg.cc/fRQsmDMR/imagen1.png"
+        stock: 35
+        category: "Marvel"
+        owner: "diego_fg91@hotmail.com"    
+
+
+  requestBodies:
+    updateProduct:
+      type: object
+      properties:        
+        title:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        thumbnail:
+          type: string          
+        code: 
+          type: string
+        stock: 
+          type: number
+        owner:           
+            type: string
+        category:           
+            type: string

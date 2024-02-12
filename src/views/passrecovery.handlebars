@@ -1,0 +1,89 @@
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-12 shadow-lg p-3 mb-5">
+            <div class="card border-primary">
+                <div class="card-header bg-primary text-white">Cambiar contraseña</div>
+                <div class="card-body text-primary">
+                    <form action="/recoverypass/:{{token}}" method="post">                    
+                      <div class="mb-3">                        
+                        <input type="hidden" name="user" value="{{user}}">
+                    </div>                    
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña Nueva</label>
+                        <input type="password" id="newpass" name="newpass" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Repetir Contraseña</label>
+                        <input type="password" id="newpass2" name="newpass2" class="form-control">
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-primary">
+                    <a href="/" type="button" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                </div>                
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-transparent text-dark pt-5 pb-4">
+  <div class="d-flex justify-content-between m-5">
+    <div class="row text-center text-md-start justify-content-between">
+      <div class="col-md-3 col-lg-8 col-x1-8 mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold text-primary">Nosotros</h5>
+        <hr class="mb-4">
+        <p class="text">Funko POP es una marca líder en estilo de vida de la cultura pop. Brindamos conexión 
+                con
+                una línea de productos que incluye tus juguetes de acción favoritos. Como el propietario de licencias más grande del mundo,
+                los
+                entusiastas del entretenimiento muestran su fanatismo a través de la lente de los productos Funko.
+
+
+                ¡La compañía ofrece una gran selección de productos de consumo de la cultura pop a través de nuestra web, Obtenga más
+                información en
+                nuestras redes sociales y síganos en Twitter, facebook e Instagram para mayor información.</p>
+      </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-primary">Contacto</h5>
+          <hr class="mb-4">
+          <div class="d-flex">
+            <li class="fas fa-home me-3 text-light"></li>
+            <p class="text-light">Av.Corrientes 1333 PB</p>
+          </div>
+          <div class="d-flex">
+            <li class="fas fa-envelope me-3 text-light"></li>
+            <p class="text-light">diego_fg91@hotmail.com</p>
+          </div>     
+          <div class="d-flex">
+            <li class="fab fa-whatsapp me-3 text-light"></li>
+            <p class="text-light">+54116666666</p>
+          </div>         
+        </div>
+        <hr class="mb-4">
+        <div class="text-center mb-2">
+          <p class="text-light">Copyright Todos los derechos Reservados ® 
+            <a href="#">
+              <strong class="text-primary"></strong>
+            </a>
+          </p>
+        </div>
+        <div class="text-center">
+          <ul class="list-unstyled list-inline">
+            <li class="list-inline-item">
+              <a href="https://www.facebook.com/" target="_blank" class="text-light"><i class="fab fa-facebook"></i></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://twitter.com/" target="_blank" class="text-light"><i class="fab fa-twitter"></i></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://www.instagram.com/" target="_blank" class="text-light"><i class="fab fa-instagram"></i></a>
+            </li>            
+            <li class="list-inline-item">
+              <a href="https://www.youtube.com/watch?v=RCnxTwMZLes&t=332s" target="_blank" class="text-light"><i class="fab fa-youtube"></i></a>
+            </li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</footer>

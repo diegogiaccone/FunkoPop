@@ -1,0 +1,16 @@
+{"level":"warn","message":"Alerta"}
+{"level":"warn","message":"Alerta"}
+{"level":"error","message":"GET /public/style.css 12:25:19"}
+{"level":"error","message":"GET /public/style.css 12:25:29"}
+{"level":"error","message":"GET /public/style.css 12:25:38"}
+{"level":"error","message":"GET /public/style.css 12:26:22"}
+{"level":"fatal","message":"GET /public/style.css 12:27:16"}
+{"level":"fatal","message":"GET /public/style.css 12:27:28"}
+{"level":"fatal","message":"GET /public/style.css 12:27:40"}
+{"level":"info","message":"GET /public/style.css 20:00:14"}
+{"level":"info","message":"GET /public/style.css 20:00:19"}
+{"level":"info","message":"GET /public/profiles/BARNI.png 20:00:20"}
+{"level":"info","message":"GET /public/style.css 20:01:35"}
+{"level":"info","message":"GET /public/profiles/BARNI.png 20:01:35"}
+{"level":"info","message":"GET /public/style.css 20:02:27"}
+{"level":"info","message":"GET /public/profiles/BARNI.png 20:02:27"}

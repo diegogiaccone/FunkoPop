@@ -1,0 +1,74 @@
+# Bajo paths definimos las rutas
+paths:
+  /api/tickets: 
+    get:
+      summary: Retorna una lista de Tickets de cada compra
+      # Este título encabezará la lista
+      tags:
+        - Tickets
+      # Es importante agregar esta sección de códigos de respuesta
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  # Esta línea hace referencia al esquema de User (tomado desde el modelo de Mongoose)
+                  # Se puede ver el esquema indicado más abajo, en components
+                  $ref: '#/components/schemas/tickets'
+        "500":
+          description: 'ERROR'    
+ 
+  /api/download:    
+    get:
+      summary: descarga un archivo pdf de el ticket de compra
+      tags:
+        - Tickets          
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/tickets'
+        "500":
+          description: 'ERROR'     
+
+components:
+  schemas:
+    # Este esquema se coloca separado acá, para poder referenciarlo en distintos
+    # endpoints arriba
+    tickets:
+      type: Array
+      properties:
+        _id:
+          type: object
+          description: Mongoose ObjectID
+        ticket:
+          type: Array
+          description: Mongoose ObjectID
+        code:
+          type: string
+        purchaser:
+          type: number
+        purchaser_datetime:
+          type: string          
+        amount: 
+          type: number
+        total: 
+          type: number                       
+
+      # Siempre es útil un ejemplo, también pueden colocarse ejemplos específicos por endpoint arriba
+      example:       
+        _id: 64b5ed9bf208b01b93fbd51c
+        purchase: Array
+        code: "weJq9iPiV1PO0SZGWPWi8"
+        purchaser: "diego_fg91@hotmail.com"
+        purchase_datetime: "domingo, 30 de julio de 2023, 20:58:33 GMT-3"
+        total: 26300
+         
+

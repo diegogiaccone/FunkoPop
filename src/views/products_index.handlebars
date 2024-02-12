@@ -1,0 +1,163 @@
+<body>
+  <header class="container-fluid bg-dark position-sticky top-0">
+    <div class="navbar-nav">
+      <div class="header2">
+        <div class="title">
+          <img class="avatar" src="https://i.postimg.cc/65D2wVCC/imagen.png" alt="">
+        <h1>FUNKOPOPS</h1>
+        <a href="/api/carts" class="btn btn-outline-warning cart productall">Mi Carrito Funko 🛒
+        {{#if cart}}
+        <span class="badge bg-danger rounded-pill">{{cartQty}}</span>
+        {{/if}}
+        </a>  
+        <a href="/" class="btn btn-outline-success cart productall" style="margin-left: 10px;">Inicio</a>
+        <a href="/api/tickets" class="btn btn-outline-danger button cart productall">Mis Compras  📃</a>
+        {{#if isAdmin}}
+        {{!-- <a href="/fakeuser" class="btn btn-info text-light button cart productall">Mock Fakeuser</a> --}}           
+        <a href="/rol" class="btn btn-outline-primary button cart productall">Editar Usuario</a> 
+        {{/if}}
+        {{#or isPremium isUsuario}}
+        <a href="/api/users/premium/:uid" class="btn btn-outline-primary button cart productall">Premium</a>          
+        {{/or}}
+        {{#or isAdmin isPremium}}
+        <a href="/api/addProduct" class="btn btn-orange button cart productall">Agregar Productos</a>           
+        {{/or}}
+        </div>  
+        <div class="navbartotal">
+        <div >
+          <h4 class="card-title pt-2 text-center text-primary">Bienvenido:({{name}})</h4>
+        </div>
+        <div>
+          <h4 class="card-title pt-2 text-center text-success">Rol:({{rol}})</h4>         
+        </div>
+        <div class="btn-group">
+      <img src={{avatar}} class="btn dropdown-toggle avatar" data-bs-toggle="dropdown" aria-expanded="false" />
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="/updateavatar">Cambiar Avatar</a></li>
+    {{#if pass}}
+    <li><a class="dropdown-item" href="/updatepass">Cambiar Contraseña</a></li>       
+    {{/if}}
+    {{#or isPremium isUsuario}}
+    <li><a class="dropdown-item" href="/uploadDocuments">Pasar a Premium</a></li>
+    {{/or}}    
+    <li><a class="dropdown-item" href="/api/users">Todos los usuarios</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a href="/logout" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>    
+  </ul>
+    </div>
+  </header>
+
+
+      <div class="row row-cols-sm-10 row-cols-md-2 row-cols-lg-4 row-cols-x1-4" id="card">
+        {{#each products}}
+        <div class="col d-flex justify-content-center mb-4 divCard" id="dataProd">
+          <div class="card shadow mb-1 bg-dark rounded" style="width: 20rem">
+            <h5 class="card-title pt-2 text-center text-primary">{{this.title}}</h5>
+            <img src={{this.thumbnail}} class="card-img-top" />
+            <div class="card-body">
+              <p class="card-text text-white-50 description">
+                {{this.description}}
+              </p>
+              <h5 class="text-primary">
+                Precio: <span>$ {{this.price}}</span>
+              </h5>
+              <h5 class="text-primary">
+                Stock: <span>{{this.stock}}</span>
+              </h5>
+              <h5 class="text-primary">
+                Categoria: <span>{{this.category}}</span>
+              </h5>             
+              <form action="/api/carts/:cid/products/:pid" method="post">
+              <div class="d-grid gap-2 eliminar">
+                <input type="hidden" name="id" value="{{this.id}}">                
+                <button type="submit" class="btn btn-primary button">
+                  Añadir al Carrito
+                </button>
+              </div>             
+              </form>
+              {{#or ../isAdmin ../isPremium}}          
+              <form action="/api/products_index:id?_method=DELETE" method="post">
+              <div class="d-grid gap-2 eliminar">
+                <input type="hidden" name="id" value="{{this.id}}">                
+                <button type="submit" class="btn btn-danger button">
+                  Eliminar
+                </button>
+              </div>
+              </form>
+              <form action="/api/update?_method=GET" method="post">
+              <div class="d-grid gap-2 eliminar">
+                <input type="hidden" name="id" value="{{this.id}}">                
+                <button type="submit" class="btn btn-warning button" href="/api/update">
+                  Actualizar
+                </button>
+              </div>
+              </form>
+              {{/or}}  
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>        
+      
+
+<footer class="bg-transparent text-dark pt-5 pb-4">
+  <div class="d-flex justify-content-between m-5">
+    <div class="row text-center text-md-start justify-content-between">
+      <div class="col-md-3 col-lg-8 col-x1-8 mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold text-primary">Nosotros</h5>
+        <hr class="mb-4">
+        <p class="text">Funko POP es una marca líder en estilo de vida de la cultura pop. Brindamos conexión 
+                con
+                una línea de productos que incluye tus juguetes de acción favoritos. Como el propietario de licencias más grande del mundo,
+                los
+                entusiastas del entretenimiento muestran su fanatismo a través de la lente de los productos Funko.
+
+
+                ¡La compañía ofrece una gran selección de productos de consumo de la cultura pop a través de nuestra web, Obtenga más
+                información en
+                nuestras redes sociales y síganos en Twitter, facebook e Instagram para mayor información.</p>
+      </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-primary">Contacto</h5>
+          <hr class="mb-4">
+          <div class="d-flex">
+            <li class="fas fa-home me-3 text-light"></li>
+            <p class="text-light">Av.Corrientes 1333 PB</p>
+          </div>
+          <div class="d-flex">
+            <li class="fas fa-envelope me-3 text-light"></li>
+            <p class="text-light">diego_fg91@hotmail.com</p>
+          </div>     
+          <div class="d-flex">
+            <li class="fab fa-whatsapp me-3 text-light"></li>
+            <p class="text-light">+54116666666</p>
+          </div>         
+        </div>
+        <hr class="mb-4">
+        <div class="text-center mb-2">
+          <p class="text-light">Copyright Todos los derechos Reservados ® 
+            <a href="#">
+              <strong class="text-primary"></strong>
+            </a>
+          </p>
+        </div>
+        <div class="text-center">
+          <ul class="list-unstyled list-inline">
+            <li class="list-inline-item">
+              <a href="https://www.facebook.com/" target="_blank" class="text-light"><i class="fab fa-facebook"></i></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://twitter.com/" target="_blank" class="text-light"><i class="fab fa-twitter"></i></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://www.instagram.com/" target="_blank" class="text-light"><i class="fab fa-instagram"></i></a>
+            </li>            
+            <li class="list-inline-item">
+              <a href="https://www.youtube.com/watch?v=RCnxTwMZLes&t=332s" target="_blank" class="text-light"><i class="fab fa-youtube"></i></a>
+            </li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</footer>
+   
